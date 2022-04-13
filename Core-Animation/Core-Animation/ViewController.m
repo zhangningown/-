@@ -9,6 +9,8 @@
 #import "BlueView.h"
 #import "LayerLabel.h"
 #import "ReflectionView.h"
+#import "ZnButton.h"
+
 
 @interface ViewController ()
 @property (nonatomic, strong)UIView *redView;
@@ -32,8 +34,15 @@
 @property(nonatomic,strong)UIView *outerView;
 @property(nonatomic,strong)UIView *innerView;
 
-
+@property(nonatomic,strong)CAEmitterLayer *colorBallLayer;
 @property(nonatomic,strong)NSMutableArray *viewList;
+
+
+@property(nonatomic,strong)CAEmitterLayer *rainLayer;
+
+
+
+
 
 
 @end
@@ -54,11 +63,256 @@
 //    [self test7];
 //    [self test8];
 //    [self test9];
-    [self test10];
+//    [self test10];
+//    [self test11];
+//    [self test12];
+    [self test13];
     
     
     
     // Do any additional setup after loading the view.
+}
+
+#pragma mark - QQ点赞功能
+-(void)test13{
+    
+    ZnButton *btn = [ZnButton buttonWithType:UIButtonTypeCustom];
+    
+    btn.frame = CGRectMake(100, 100, 40, 40);
+    
+    
+    [btn setImage:[UIImage imageNamed:@"un点赞"] forState:UIControlStateNormal];
+    
+    [btn setImage:[UIImage imageNamed:@"点赞"] forState:UIControlStateSelected];
+    
+    btn.center = self.view.center;
+    
+    [btn addTarget:self action:@selector(btnSelect:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.view addSubview:btn];
+
+    //按钮先放大 CAKeyFrameAnimation
+    
+    //发达之后一个圈粒子特效  CAEmitterLayer
+    
+    
+}
+
+-(void)btnSelect:(UIButton *)sender{
+    
+    if (sender.isSelected) {
+        
+        NSLog(@"取消点赞");
+        
+    }else{
+        
+        
+        NSLog(@"点赞");
+        
+    }
+    
+    [sender setSelected:!sender.isSelected];
+    
+    
+    
+}
+
+#pragma mark - 粒子效果 下雨
+-(void)test12{
+    
+    
+    UIImage *image = [UIImage imageNamed:@"ecfab1b7449dff80a6c3483006304a7e.jpeg"];
+    
+    self.view.layer.contents = (__bridge id)image.CGImage;
+    //设置裁剪方式
+    self.view.layer.contentsGravity = kCAGravityResizeAspect;
+    //设置retain屏
+    self.view.layer.contentsScale = [[UIScreen mainScreen] scale];
+    
+    
+    NSArray *buttonName = @[@"下大点",@"下小点",@"雨停了"];
+    
+    
+    for (int i = 0; i < 3; i++) {
+        
+        UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(i*80+ (i+1)*10, [UIScreen mainScreen].bounds.size.height - 50, 80, 40)];
+        btn.tag = i * 100;
+        [btn setTitle:buttonName[i] forState:UIControlStateNormal];
+        [btn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
+        btn.backgroundColor = UIColor.brownColor;
+        [self.view addSubview:btn];
+        
+    }
+    
+    //粒子发射源
+    CAEmitterLayer *rainLayer = [CAEmitterLayer layer];
+    [self.view.layer addSublayer:rainLayer];
+    self.rainLayer = rainLayer;
+    
+    //粒子发射属性
+    rainLayer.emitterShape = kCAEmitterLayerLine;
+    rainLayer.emitterMode = kCAEmitterLayerSurface;
+    rainLayer.emitterPosition = CGPointMake(self.view.bounds.size.width * 0.5, -10);
+    rainLayer.emitterSize = self.view.frame.size;
+    
+    //设置cell
+    CAEmitterCell *rainLayerCell = [CAEmitterCell emitterCell];
+    rainLayerCell.contents = (__bridge id)[UIImage imageNamed:@"水滴"].CGImage;
+    rainLayerCell.birthRate = 25.0f;
+    rainLayerCell.lifetime = 20.0f;
+    rainLayerCell.speed = 10.0f;
+    rainLayerCell.velocity = 10.0f;
+    rainLayerCell.yAcceleration = 1000.0f;
+    rainLayerCell.scale = 0.1;
+    rainLayerCell.scaleRange = 0.0f;
+    rainLayer.emitterCells = @[rainLayerCell];
+    
+    
+    
+    
+    
+}
+
+
+-(void)buttonClick:(UIButton *)sender{
+    
+    NSInteger rate = 1;
+    CGFloat scale = 0.05;
+    
+    switch (sender.tag) {
+        case 0:
+            NSLog(@"下大点");
+            if (self.rainLayer.birthRate < 30) {
+                
+                [self.rainLayer setValue:@(self.rainLayer.birthRate + rate) forKey:@"birthRate"];
+                
+                [self.rainLayer setValue:@(self.rainLayer.scale + scale) forKey:@"scale"];
+                
+            }
+            break;
+        case 100:
+            NSLog(@"下小点");
+            if (self.rainLayer.birthRate > 1) {
+                
+                [self.rainLayer setValue:@(self.rainLayer.birthRate - rate) forKey:@"birthRate"];
+                
+                [self.rainLayer setValue:@(self.rainLayer.scale - scale) forKey:@"scale"];
+                
+            }
+            break;
+        case 200:
+            NSLog(@"雨停了");
+            [self.rainLayer setValue:@(0) forKey:@"birthRate"];
+            
+            break;
+        default:
+            break;
+    }
+    
+    
+    
+}
+
+
+
+#pragma mark - 粒子效果
+-(void)test11{
+    
+    
+    
+    self.view.backgroundColor = UIColor.blackColor;
+    
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 100, self.view.bounds.size.width, 50)];
+    
+    [self.view addSubview:label];
+    
+    label.textColor = UIColor.whiteColor;
+    
+    label.text = @"轻点或拖动来改变发射源位置";
+    
+    label.textAlignment = NSTextAlignmentCenter;
+    
+
+    
+    
+    /*
+     CAEmitterLayer::粒子图层
+     CAEmitterCell 发射粒子
+     
+     CAEmitterLayer:
+     *emitterPosition:决定发射的中心点
+     *emitterShap:粒子发射形状
+        kCAEmitterLayerPoint --点形状
+        kCAEmitterLayerLine --线形状
+        kACEmitterLayerRectangle -- 矩阵形状
+        kCAEmitterLayerCubiid --立体矩阵块
+        kCAE蜜桃特然LayerCircle -- 圆形
+        kCAEmitterLayerSphere -- 立体圆形（3D）
+     *emitterMode:发射模式
+        kCAEmitterLayerPoints --点模式
+        kCAEmitterLayerOutLine -- 轮廓模式
+        kCAEmitterLayerSurface -- 表面模式
+        kCAEmitterLayerVolume  -- 3D发射模式
+     */
+    
+    
+    
+    //发射类
+    CAEmitterLayer *colorBallLayer = [CAEmitterLayer layer];
+    [self.view.layer addSublayer:colorBallLayer];
+    
+    self.colorBallLayer = colorBallLayer;
+    
+    colorBallLayer.emitterSize = self.view.frame.size;
+    
+    colorBallLayer.emitterShape = kCAEmitterLayerPoint;
+    
+    colorBallLayer.emitterMode = kCAEmitterLayerPoints;
+    
+    colorBallLayer.emitterPosition = CGPointMake(self.view.layer.bounds.size.width, 0);
+    
+    CAEmitterCell *colorBallCell = [CAEmitterCell emitterCell];
+    
+    colorBallCell.name = @"ccCell";
+    
+    colorBallCell.birthRate = 20.0f;
+    
+    colorBallCell.lifetime = 10.0f;
+    
+    colorBallCell.velocity = 40.0f;
+    
+    colorBallCell.velocityRange = 100.0;
+    colorBallCell.yAcceleration = 15.0f;
+    
+    colorBallCell.emissionLatitude = M_PI;
+    colorBallCell.emissionRange = M_PI_4;
+    
+    colorBallCell.scale = 0.2;
+    
+    colorBallCell.scaleRange = 0.5;
+    
+    colorBallCell.scaleSpeed = 0.02;
+    
+    
+    colorBallCell.contents = (__bridge id)[UIImage imageNamed:@"雪花"].CGImage;
+    
+    //颜色变化
+    colorBallCell.color = [UIColor colorWithRed:0.5 green:0.0 blue:0.5 alpha:1].CGColor;
+    
+    
+    colorBallCell.alphaRange = 0.8;
+    
+    colorBallCell.redRange = 1.0;
+    colorBallCell.greenRange = 1.0;
+    colorBallCell.blueRange = 1.0;
+    
+    colorBallCell.blueSpeed = 1.0f;
+    colorBallCell.alphaSpeed = -0.1;
+    
+    
+    colorBallLayer.emitterCells = @[colorBallCell];
+    
+    
 }
 
 const CGFloat kReflectPercent = 0.5;
@@ -86,11 +340,7 @@ const CGFloat kReflectDistance = 2.0f;
 //
 //
 //    CATransform3D transform = CATransform3DIdentity;
-//
-//
-//
-//
-//
+
 //    transform = CATransform3DRotate(transform, M_PI, 1, 0, 0);
 //
 //
@@ -708,7 +958,40 @@ const CGFloat kReflectDistance = 2.0f;
     
    
     
+//    [self setBallInPasition:[self locationFromTouchEvent:event]];
+    
 
+}
+
+
+-(CGPoint)locationFromTouchEvent:(UIEvent *)event{
+    
+    UITouch *touch = [[event allTouches] anyObject];
+    return [touch locationInView:self.view];
+    
+}
+
+
+-(void)setBallInPasition:(CGPoint)position{
+    
+    
+    CABasicAnimation *anim = [CABasicAnimation animationWithKeyPath:@"emitterCells.colorBallCell.scale"];
+    anim.fromValue = @0.2;
+    anim.toValue = @0.5f;
+    anim.duration = 1.0;
+    
+    anim.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
+    
+    [CATransaction begin];
+    
+    [CATransaction setDisableActions:YES];
+    
+    [self.colorBallLayer addAnimation:anim forKey:nil];
+    
+    [self.colorBallLayer setValue:[NSValue valueWithCGPoint:position] forKey:@"emitterPosition"];
+    
+    [CATransaction commit];
+    
 }
 
 

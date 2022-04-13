@@ -10,6 +10,12 @@
 		6918467C2803FE7E00674313 /* ecfab1b7449dff80a6c3483006304a7e.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 6918467B2803FE7E00674313 /* ecfab1b7449dff80a6c3483006304a7e.jpeg */; };
 		6918467F2804578D00674313 /* LayerLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6918467E2804578D00674313 /* LayerLabel.m */; };
 		6918468228051A5F00674313 /* ReflectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6918468128051A5F00674313 /* ReflectionView.m */; };
+		6918468628069E0C00674313 /* 雪花.png in Resources */ = {isa = PBXBuildFile; fileRef = 6918468528069E0C00674313 /* 雪花.png */; };
+		691846902806AFE400674313 /* 水滴.png in Resources */ = {isa = PBXBuildFile; fileRef = 6918468F2806AFE300674313 /* 水滴.png */; };
+		691846922806B26600674313 /* 点赞.png in Resources */ = {isa = PBXBuildFile; fileRef = 691846912806B26600674313 /* 点赞.png */; };
+		691846942806B2EE00674313 /* un点赞.png in Resources */ = {isa = PBXBuildFile; fileRef = 691846932806B2EE00674313 /* un点赞.png */; };
+		691846B72806C26E00674313 /* ZnButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 691846B62806C26E00674313 /* ZnButton.m */; };
+		691846B92806C68100674313 /* 同心圆图.png in Resources */ = {isa = PBXBuildFile; fileRef = 691846B82806C68000674313 /* 同心圆图.png */; };
 		69377A7425C3F95100103DF3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 69377A7325C3F95100103DF3 /* AppDelegate.m */; };
 		69377A7725C3F95100103DF3 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 69377A7625C3F95100103DF3 /* SceneDelegate.m */; };
 		69377A7A25C3F95100103DF3 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 69377A7925C3F95100103DF3 /* ViewController.m */; };
@@ -28,6 +34,13 @@
 		6918467E2804578D00674313 /* LayerLabel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LayerLabel.m; sourceTree = "<group>"; };
 		6918468028051A5E00674313 /* ReflectionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReflectionView.h; sourceTree = "<group>"; };
 		6918468128051A5F00674313 /* ReflectionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReflectionView.m; sourceTree = "<group>"; };
+		6918468528069E0C00674313 /* 雪花.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "雪花.png"; sourceTree = "<group>"; };
+		6918468F2806AFE300674313 /* 水滴.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "水滴.png"; sourceTree = "<group>"; };
+		691846912806B26600674313 /* 点赞.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "点赞.png"; sourceTree = "<group>"; };
+		691846932806B2EE00674313 /* un点赞.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "un点赞.png"; sourceTree = "<group>"; };
+		691846B52806C26E00674313 /* ZnButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZnButton.h; sourceTree = "<group>"; };
+		691846B62806C26E00674313 /* ZnButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZnButton.m; sourceTree = "<group>"; };
+		691846B82806C68000674313 /* 同心圆图.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "同心圆图.png"; sourceTree = "<group>"; };
 		69377A6F25C3F95100103DF3 /* Core-Animation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Core-Animation.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		69377A7225C3F95100103DF3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		69377A7325C3F95100103DF3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -76,6 +89,11 @@
 		69377A7125C3F95100103DF3 /* Core-Animation */ = {
 			isa = PBXGroup;
 			children = (
+				691846B82806C68000674313 /* 同心圆图.png */,
+				691846932806B2EE00674313 /* un点赞.png */,
+				691846912806B26600674313 /* 点赞.png */,
+				6918468F2806AFE300674313 /* 水滴.png */,
+				6918468528069E0C00674313 /* 雪花.png */,
 				6918467B2803FE7E00674313 /* ecfab1b7449dff80a6c3483006304a7e.jpeg */,
 				69F76A3A27FED33B00776054 /* 65d8143bd5393aaf1cbe117f0e00425f.jpeg */,
 				69F76A3427FED13100776054 /* test1.png */,
@@ -85,6 +103,8 @@
 				69377A7625C3F95100103DF3 /* SceneDelegate.m */,
 				69377A7825C3F95100103DF3 /* ViewController.h */,
 				69377A7925C3F95100103DF3 /* ViewController.m */,
+				691846B52806C26E00674313 /* ZnButton.h */,
+				691846B62806C26E00674313 /* ZnButton.m */,
 				6918468028051A5E00674313 /* ReflectionView.h */,
 				6918468128051A5F00674313 /* ReflectionView.m */,
 				6918467D2804578D00674313 /* LayerLabel.h */,
@@ -156,12 +176,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				691846B92806C68100674313 /* 同心圆图.png in Resources */,
+				691846922806B26600674313 /* 点赞.png in Resources */,
+				691846942806B2EE00674313 /* un点赞.png in Resources */,
 				69377A8225C3F95400103DF3 /* LaunchScreen.storyboard in Resources */,
 				6918467C2803FE7E00674313 /* ecfab1b7449dff80a6c3483006304a7e.jpeg in Resources */,
 				69F76A3527FED13100776054 /* test1.png in Resources */,
 				69377A7F25C3F95400103DF3 /* Assets.xcassets in Resources */,
 				69F76A3B27FED33B00776054 /* 65d8143bd5393aaf1cbe117f0e00425f.jpeg in Resources */,
+				6918468628069E0C00674313 /* 雪花.png in Resources */,
 				69377A7D25C3F95100103DF3 /* Main.storyboard in Resources */,
+				691846902806AFE400674313 /* 水滴.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -173,6 +198,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6918467F2804578D00674313 /* LayerLabel.m in Sources */,
+				691846B72806C26E00674313 /* ZnButton.m in Sources */,
 				69377A7A25C3F95100103DF3 /* ViewController.m in Sources */,
 				6918468228051A5F00674313 /* ReflectionView.m in Sources */,
 				69377A7425C3F95100103DF3 /* AppDelegate.m in Sources */,
@@ -324,7 +350,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = C299C2M2ZC;
 				ENABLE_HARDENED_RUNTIME = YES;
-				INFOPLIST_FILE = Test/Info.plist;
+				INFOPLIST_FILE = "Core-Animation/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -343,7 +369,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = C299C2M2ZC;
 				ENABLE_HARDENED_RUNTIME = YES;
-				INFOPLIST_FILE = Test/Info.plist;
+				INFOPLIST_FILE = "Core-Animation/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
