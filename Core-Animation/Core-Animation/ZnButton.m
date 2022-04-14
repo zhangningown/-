@@ -71,18 +71,25 @@
 
 -(void)startAnimation{
     
-    [self.explosionLayer setValue:@1000 forKey:@"emitterCells.explosionCell.birthRate"];
+    // 用KVC设置颗粒个数  explosionCell与 cell.name要一致
+    [self.explosionLayer setValue:@1000 forKeyPath:@"emitterCells.explosionCell.birthRate"];
     
+    // 开始动画
     self.explosionLayer.beginTime = CACurrentMediaTime();
     
+    // 延迟停止动画
     [self performSelector:@selector(stopAnimation) withObject:nil afterDelay:0.15];
+    
     
 }
 
 -(void)stopAnimation{
     
-    [self.explosionLayer setValue:@0 forKey:@"emitterCells.explosionCell.birthRate"];
+    // 用KVC设置颗粒个数 explosionCell与 cell.name要一致
+    [self.explosionLayer setValue:@0 forKeyPath:@"emitterCells.explosionCell.birthRate"];
+    // 移除动画
     [self.explosionLayer removeAllAnimations];
+
     
 }
 
@@ -94,29 +101,48 @@
     
 }
 
--(void)setupExplosion{
-    
-    CAEmitterCell *explosionCell = [CAEmitterCell emitterCell];
-    explosionCell.name = @"cell";
-    explosionCell.alphaSpeed = -1.0f;
-    explosionCell.alphaRange = 1;
-    explosionCell.lifetime = 0.1;
-    explosionCell.velocity = 40.0f;
-    explosionCell.velocityRange = 10.0f;
-    explosionCell.scaleRange = 0.08;
-    explosionCell.scaleSpeed = 0.02;
-    explosionCell.contents = (id)[UIImage imageNamed:@"同心圆图"].CGImage;
- 
-    CAEmitterLayer *explosionLayer = [CAEmitterLayer layer];
+
+
+//// 设置粒子
+- (void)setupExplosion{
+
+    // 粒子
+    CAEmitterCell * explosionCell = [CAEmitterCell emitterCell];
+    //此处要注意 如果名称与上面开始动画kvc值 不一样 不会产生效果
+    explosionCell.name = @"explosionCell";
+    // 透明值变化速度
+    explosionCell.alphaSpeed = -1.f;
+    // alphaRange透明值范围
+    explosionCell.alphaRange = 0.10;
+    // 生命周期
+    explosionCell.lifetime = 1;
+    // 生命周期range
+    explosionCell.lifetimeRange = 0.1;
+    // 粒子速度
+    explosionCell.velocity = 40.f;
+    // 粒子速度范围
+    explosionCell.velocityRange = 10.f;
+    // 缩放比例
+    explosionCell.scale = 0.08;
+    // 缩放比例range
+    explosionCell.scaleRange = 0.02;
+    // 粒子图片
+    explosionCell.contents = (id)[[UIImage imageNamed:@"spark_red"] CGImage];
+
+    // 发射源
+    CAEmitterLayer * explosionLayer = [CAEmitterLayer layer];
     [self.layer addSublayer:explosionLayer];
     self.explosionLayer = explosionLayer;
+    // 发射院尺寸大小
     self.explosionLayer.emitterSize = CGSizeMake(self.bounds.size.width + 40, self.bounds.size.height + 40);
-    self.explosionLayer.emitterShape = kCAEmitterLayerCircle;
-    self.explosionLayer.emitterMode = kCAEmitterLayerOutline;
-    self.explosionLayer.renderMode = kCAEmitterLayerOldestFirst;
-    self.explosionLayer.emitterCells = @[explosionCell];
-    
-    
+    // emitterShape表示粒子从什么形状发射出来,圆形形状
+    explosionLayer.emitterShape = kCAEmitterLayerCircle;
+    // emitterMode发射模型,轮廓模式,从形状的边界上发射粒子
+    explosionLayer.emitterMode = kCAEmitterLayerOutline;
+    // renderMode:渲染模式
+    explosionLayer.renderMode = kCAEmitterLayerOldestFirst;
+    // 粒子cell 数组
+    explosionLayer.emitterCells = @[explosionCell];
 }
 
 

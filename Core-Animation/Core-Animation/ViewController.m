@@ -78,7 +78,7 @@
     
     ZnButton *btn = [ZnButton buttonWithType:UIButtonTypeCustom];
     
-    btn.frame = CGRectMake(100, 100, 40, 40);
+    btn.frame = CGRectMake(100, 100, 30, 30);
     
     
     [btn setImage:[UIImage imageNamed:@"un点赞"] forState:UIControlStateNormal];
